@@ -31,7 +31,7 @@ def Trail():
     for labels in [mercury,venus,earth,mars]:
         labels.make_trail = not labels.make_trail
 button( bind = Trail, text='Hide/Show Trails' )
-scene.append_to_caption('\n\n')
+scene.append_to_caption('\n')
 
 def Label():
     for labels in [LSun,Lmercury,Lvenus,Learth,Lmars]:
