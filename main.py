@@ -27,12 +27,18 @@ scene.pause()
 
 angle_1 = angle_2 = angle_3 = angle_4 = 0
 
+def Trail():
+    for labels in [mercury,venus,earth,mars]:
+        labels.make_trail = not labels.make_trail
+button( bind = Trail, text='Hide/Show Trails' )
+scene.append_to_caption('\n\n')
 
 def Label():
     for labels in [LSun,Lmercury,Lvenus,Learth,Lmars]:
         labels.visible = not labels.visible
-button( bind = Label, text='Hide/Show' )
+button( bind = Label, text='Hide/Show Labels' )
 scene.append_to_caption('\n\n')
+
 
 while True:
     keys = keysdown()
