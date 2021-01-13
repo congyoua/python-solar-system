@@ -24,7 +24,7 @@ Lmars = label(pos=vector(0,1.5173,0), text='Mars', xoffset=20, yoffset=0, space=
 scene.waitfor("textures")
 scene.visible = True
 
-angle = 0
+angle_1 = angle_2 = angle_3 = angle_4 = 0
 
 while True:
     keys = keysdown()
@@ -39,32 +39,33 @@ while True:
 
     rate(30)
 
-    mercury.pos.x = 0.387 * sin(radians(angle)) + 0.0796
-    mercury.pos.y = 0.3788 * cos(radians(angle))
-    mercury.pos.z = 7 * sin(radians(angle))
-    Lmercury.pos.x = 0.387 * sin(radians(angle)) + 0.0796
-    Lmercury.pos.y = 0.3788 * cos(radians(angle))
-    Lmercury.pos.z = 7 * sin(radians(angle))
+    angle_1 += 360/88
+    mercury.pos.x = 0.387 * sin(radians(angle_1)) + 0.0796
+    mercury.pos.y = 0.3788 * cos(radians(angle_1))
+    #mercury.pos.z = 7 * sin(radians(angle_1))
+    Lmercury.pos.x = 0.387 * sin(radians(angle_1)) + 0.0796
+    Lmercury.pos.y = 0.3788 * cos(radians(angle_1))
+    #Lmercury.pos.z = 7 * sin(radians(angle_1))
 
-    venus.pos.x = 0.7219 * sin(radians(angle)) + 0.0049
-    venus.pos.y = 0.7219 * cos(radians(angle))
-    venus.pos.z = 3.4 * sin(radians(angle))
-    Lvenus.pos.x = 0.7219 * sin(radians(angle)) + 0.0049
-    Lvenus.pos.y = 0.7219 * cos(radians(angle))
-    Lvenus.pos.z = 3.4 * sin(radians(angle))
+    angle_2 += 360/224.7
+    venus.pos.x = 0.7219 * sin(radians(angle_2)) + 0.0049
+    venus.pos.y = 0.7219 * cos(radians(angle_2))
+    #venus.pos.z = 3.4 * sin(radians(angle_2))
+    Lvenus.pos.x = 0.7219 * sin(radians(angle_2)) + 0.0049
+    Lvenus.pos.y = 0.7219 * cos(radians(angle_2))
+    #Lvenus.pos.z = 3.4 * sin(radians(angle_2))
 
-    earth.pos.x = 1.0027 * sin(radians(angle)) + 0.0167
-    earth.pos.y = 1.0025 * cos(radians(angle))
-    Learth.pos.x = 1.0027 * sin(radians(angle)) + 0.0167
-    Learth.pos.y = 1.0025 * cos(radians(angle))
+    angle_3 += 360/365.2
+    earth.pos.x = 1.0027 * sin(radians(angle_3)) + 0.0167
+    earth.pos.y = 1.0025 * cos(radians(angle_3))
+    Learth.pos.x = 1.0027 * sin(radians(angle_3)) + 0.0167
+    Learth.pos.y = 1.0025 * cos(radians(angle_3))
 
-    mars.pos.x = 1.5241 * sin(radians(angle)) + 0.1424
-    mars.pos.y = 1.5173 * cos(radians(angle))
-    mars.pos.z = 1.9 * sin(radians(angle))
-    Lmars.pos.x = 1.5241 * sin(radians(angle)) + 0.1424
-    Lmars.pos.y = 1.5173 * cos(radians(angle))
-    Lmars.pos.z = 1.9 * sin(radians(angle))
+    angle_4 += 360/687
+    mars.pos.x = 1.5241 * sin(radians(angle_4)) + 0.1424
+    mars.pos.y = 1.5173 * cos(radians(angle_4))
+    #mars.pos.z = 1.9 * sin(radians(angle_4))
+    Lmars.pos.x = 1.5241 * sin(radians(angle_4)) + 0.1424
+    Lmars.pos.y = 1.5173 * cos(radians(angle_4))
+    #Lmars.pos.z = 1.9 * sin(radians(angle_4))
 
-    angle += 1
-    if angle == 359:
-        angle = 0
