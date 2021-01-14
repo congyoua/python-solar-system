@@ -27,11 +27,13 @@ scene.pause()
 
 angle_1 = angle_2 = angle_3 = angle_4 = 0
 scene.append_to_caption('\n')
+
 def Trail():
     for planet in [mercury,venus,earth,mars]:
         planet.make_trail = not planet.make_trail
 button( bind = Trail, text='Hide/Show Trails' )
 scene.append_to_caption('\n')
+
 
 def CleanTrail():
     for planet in [mercury,venus,earth,mars]:
@@ -45,6 +47,11 @@ def Label():
         labels.visible = not labels.visible
 button( bind = Label, text='Hide/Show Labels' )
 scene.append_to_caption('\n\n')
+
+scene.append_to_caption('Number keys: change the camera\n')
+scene.append_to_caption('R: reset the camera\n')
+scene.append_to_caption('P: Pause the demo, press any other key to resume\n')
+
 
 while True:
     keys = keysdown()
