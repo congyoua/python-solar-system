@@ -1,7 +1,7 @@
 from vpython import *
-from math import sin, cos, radians, tan, sqrt
+from math import sin, cos, radians
 
-scene = canvas(title='Solar System', width=1000, height=1000, center=vector(0,0,0), background=color.black)
+scene = canvas(width=1000, height=1000, center=vector(0,0,0), background=color.black)
 scene.autoscale = False
 
 sphere(pos=vector(0, 0, 0), radius=70, texture={'file': "./stars_milky_way.jpg", 'place': ['left', 'sides'], 'turn': 90}, shininess=1)
@@ -9,16 +9,16 @@ sphere(pos=vector(0, 0, 0), radius=70, texture={'file': "./stars_milky_way.jpg",
 sun = sphere(pos=vector(0,0,0), radius=0.25, texture="./sun.jpg")
 LSun = label(pos=vector(0,0,0), text='Sun', xoffset=0, yoffset=0, space=30, height=16, border=4, font='sans', visible = False)
 
-mercury = sphere(pos=vector(0,0.3788,0), radius=0.038, make_trail=True, texture="./mercury.jpg")
+mercury = sphere(pos=vector(0,0.3788,0), radius=0.038, make_trail=False, texture="./mercury.jpg")
 Lmercury = label(pos=vector(0,0.3788,0), text='Mercury', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans', visible = False)
 
-venus = sphere(pos=vector(0,0.7219,0), radius=0.095, make_trail=True, texture="./venus.jpg")
+venus = sphere(pos=vector(0,0.7219,0), radius=0.095, make_trail=False, texture="./venus.jpg")
 Lvenus = label(pos=vector(0,0.7219,0), text='Venus', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans', visible = False)
 
-earth = sphere(pos=vector(0,1.0025,0), radius=0.1, make_trail=True, texture="./earth.jpg")
+earth = sphere(pos=vector(0,1.0025,0), radius=0.1, make_trail=False, texture="./earth.jpg")
 Learth = label(pos=vector(0,1.0025,0), text='Earth', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans', visible = False)
 
-mars = sphere(pos=vector(0,1.5173,0), radius=0.053, make_trail=True, texture="./mars.jpg")
+mars = sphere(pos=vector(0,1.5173,0), radius=0.053, make_trail=False, texture="./mars.jpg")
 Lmars = label(pos=vector(0,1.5173,0), text='Mars', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans', visible = False)
 
 scene.waitfor("textures")
@@ -26,11 +26,18 @@ scene.visible = True
 scene.pause()
 
 angle_1 = angle_2 = angle_3 = angle_4 = 0
-
+scene.append_to_caption('\n')
 def Trail():
-    for labels in [mercury,venus,earth,mars]:
-        labels.make_trail = not labels.make_trail
+    for planet in [mercury,venus,earth,mars]:
+        planet.make_trail = not planet.make_trail
 button( bind = Trail, text='Hide/Show Trails' )
+scene.append_to_caption('\n')
+
+def CleanTrail():
+    for planet in [mercury,venus,earth,mars]:
+        planet.make_trail = not planet.make_trail
+        planet.clear_trail()
+button( bind = CleanTrail, text='Clean Trails' )
 scene.append_to_caption('\n')
 
 def Label():
@@ -38,7 +45,6 @@ def Label():
         labels.visible = not labels.visible
 button( bind = Label, text='Hide/Show Labels' )
 scene.append_to_caption('\n\n')
-
 
 while True:
     keys = keysdown()
