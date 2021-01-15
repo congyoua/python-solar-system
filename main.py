@@ -21,14 +21,17 @@ Learth = label(pos=vector(0,5.0125,0), text='Earth', xoffset=20, yoffset=0, spac
 mars = sphere(pos=vector(0,7.5865,0), radius=0.212, make_trail=False, texture="./mars.jpg")
 Lmars = label(pos=vector(0,7.5865,0), text='Mars', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
 
+moon = sphere(pos=vector(0,5.7625,0), radius=0.109, make_trail=False, texture="./moon.jpg")
+Lmoon = label(pos=vector(0,5.7625,0), text='Moon', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
+
 scene.waitfor("textures")
 scene.visible = True
 scene.pause()
 
-angle_1 = angle_2 = angle_3 = angle_4 = 0
+angle_1 = angle_2 = angle_3 = angle_4 = angle_5 = 0
 
 scene.append_to_caption('\nNumber keys: change the camera\n')
-scene.append_to_caption('                     1-Mercury 2-Venus 3-Earth 4-Mars\n')
+scene.append_to_caption('                     1-Mercury 2-Venus 3-Earth 4-Mars M-Moon\n')
 scene.append_to_caption('R: reset the camera\n')
 scene.append_to_caption('P: Pause the demo, press any other key to resume\n\n')
 
@@ -45,23 +48,24 @@ checkbox(bind=check_box, text='mercury' ,checked=True)
 checkbox(bind=check_box, text='venus' ,checked=True)
 checkbox(bind=check_box, text='earth' ,checked=True)
 checkbox(bind=check_box, text='mars' ,checked=True)
+checkbox(bind=check_box, text='moon' ,checked=True)
 scene.append_to_caption('\n\n')
 
 def Label(r):
-    for labels in [Lsun,Lmercury,Lvenus,Learth,Lmars]:
+    for labels in [Lsun,Lmercury,Lvenus,Learth,Lmars,Lmoon]:
             labels.visible = True if r.checked else False
 checkbox(bind = Label, text='Show Labels', checked = True)
 scene.append_to_caption('\n\n')
 
 def Trail(r):
-    for planet in [mercury,venus,earth,mars]:
+    for planet in [mercury,venus,earth,mars,moon]:
         planet.make_trail = True if r.checked else False
         planet.clear_trail()
 checkbox(bind = Trail, text='Show Trails')
 scene.append_to_caption('\n\n')
 
 def CleanTrail():
-    for planet in [mercury, venus, earth, mars]:
+    for planet in [mercury, venus, earth, mars, moon]:
         planet.clear_trail()
 button( bind = CleanTrail, text='Clear Trails' )
 scene.append_to_caption('\n\n')
@@ -78,15 +82,17 @@ while True:
         scene.camera.follow(earth)
     elif '4' in keys:
         scene.camera.follow(mars)
+    elif 'm' in keys:
+        scene.camera.follow(moon)
     elif 'r' in keys:
         scene.camera.follow(sun)
     
     rate(30)
 
     
-    mercury.pos.x = 1.89 * sin(radians(angle_1)) + 0.398
+    mercury.pos.x = 1.935 * sin(radians(angle_1)) + 0.398
     mercury.pos.y = 1.894 * cos(radians(angle_1))
-    Lmercury.pos.x = 1.89 * sin(radians(angle_1)) + 0.398
+    Lmercury.pos.x = 1.935 * sin(radians(angle_1)) + 0.398
     Lmercury.pos.y = 1.894 * cos(radians(angle_1))
     angle_1 += 360/88
 
@@ -109,3 +115,9 @@ while True:
     Lmars.pos.x = 7.6205 * sin(radians(angle_4)) + 0.712
     Lmars.pos.y = 7.5865 * cos(radians(angle_4))
     angle_4 += 360/687
+
+    moon.pos.x = earth.pos.x + 0.75 * sin(radians(angle_5)) + 0.05
+    moon.pos.y = earth.pos.y + 0.75 * cos(radians(angle_5))
+    Lmoon.pos.x = earth.pos.x + 0.75 * sin(radians(angle_5)) + 0.05
+    Lmoon.pos.y = earth.pos.y + 0.75 * cos(radians(angle_5))
+    angle_5 += 360/27.3
