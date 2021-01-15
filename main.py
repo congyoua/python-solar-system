@@ -9,19 +9,19 @@ sphere(pos=vector(0, 0, 0), radius=80, texture={'file': "./stars_milky_way.jpg",
 sun = sphere(pos=vector(0,0,0), radius=0.75, texture="./sun.jpg")
 Lsun = label(pos=vector(0,0,0), text='Sun', xoffset=0, yoffset=0, space=30, height=16, border=4, font='sans')
 
-mercury = sphere(pos=vector(0,1.894,0), radius=0.152, make_trail=False, texture="./mercury.jpg")
+mercury = sphere(pos=vector(0,1.894,0), radius=0.152, make_trail=False, trail_radius = 0.01, texture="./mercury.jpg")
 Lmercury = label(pos=vector(0,1.894,0), text='Mercury', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
 
-venus = sphere(pos=vector(0,3.6095,0), radius=0.38, make_trail=False, texture="./venus.jpg")
+venus = sphere(pos=vector(0,3.6095,0), radius=0.38, make_trail=False, trail_radius = 0.01, texture="./venus.jpg")
 Lvenus = label(pos=vector(0,3.6095,0), text='Venus', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
 
-earth = sphere(pos=vector(0,5.0125,0), radius=0.4, make_trail=False, texture="./earth.jpg")
+earth = sphere(pos=vector(0,5.0125,0), radius=0.4, make_trail=False, trail_radius = 0.01, texture="./earth.jpg")
 Learth = label(pos=vector(0,5.0125,0), text='Earth', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
 
-mars = sphere(pos=vector(0,7.5865,0), radius=0.212, make_trail=False, texture="./mars.jpg")
+mars = sphere(pos=vector(0,7.5865,0), radius=0.212, make_trail=False, trail_radius = 0.01, texture="./mars.jpg")
 Lmars = label(pos=vector(0,7.5865,0), text='Mars', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
 
-moon = sphere(pos=vector(0,5.7625,0), radius=0.109, make_trail=False, texture="./moon.jpg")
+moon = sphere(pos=vector(0,5.7625,0), radius=0.109, make_trail=False, trail_color = color.blue, trail_radius = 0.01, texture="./moon.jpg")
 Lmoon = label(pos=vector(0,5.7625,0), text='Moon', xoffset=20, yoffset=0, space=30, height=16, border=4, font='sans')
 
 scene.waitfor("textures")
@@ -58,10 +58,16 @@ checkbox(bind = Label, text='Show Labels', checked = True)
 scene.append_to_caption('\n\n')
 
 def Trail(r):
-    for planet in [mercury,venus,earth,mars,moon]:
+    for planet in [mercury,venus,earth,mars]:
         planet.make_trail = True if r.checked else False
         planet.clear_trail()
-checkbox(bind = Trail, text='Show Trails')
+checkbox(bind = Trail, text='Show Trails(without moon)')
+scene.append_to_caption('\n')
+
+def Trailmoon(r):
+    moon.make_trail = True if r.checked else False
+    moon.clear_trail()
+checkbox(bind = Trailmoon, text='Show Moon Trail')
 scene.append_to_caption('\n\n')
 
 def CleanTrail():
